@@ -178,6 +178,24 @@ describe('DB', function() {
 			});
 		});
 
+		describe('#get', function() {
+			it('returns the body of the document at the given uri', function(done) {
+				db.put(doc.uri, doc.body)
+					.then(function() {
+						return db.get(doc.uri);
+					})
+					.then(parseXmlResponse)
+					.then(function(body) {
+						expect(body).toBe(doc.body);
+					})
+					.then(done);
+			});
+		});
+
 	});
 
 });
+
+function parseXmlResponse(xml) {
+	return xml.replace(/(\r\n|\n|\r|[ ]{4})/gm,'').replace(/\"/g,'\'');
+}
