@@ -79,6 +79,28 @@ describe('DB', function() {
 				});
 			});
 
+			describe('when uri does not contain a preceding slash', function(){
+				var uriWithoutPrecedingSlash = 'my-document';
+
+				it('should not store the document', function(done) {
+					db.put(uriWithoutPrecedingSlash, doc.body)
+						.catch(function() {
+							db.exists(uriWithoutPrecedingSlash)
+								.then(function(docExists) {
+									expect(docExists).toBe(false);
+								})
+								.then(done);
+						});
+				});
+				it('should raise an error', function(done) {
+					db.put(uriWithoutPrecedingSlash, doc.body)
+						.catch(function(err) {
+							expect(err.message).toBe('ArgumentError: \"uri\" must contain preceding \'/\'');
+							done();
+						});
+				});
+			});
+
 		});
 
 		describe('#delete', function() {
