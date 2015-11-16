@@ -25,7 +25,7 @@ describe('DB', function() {
 
 		afterEach(function(done) {
 			db.delete(doc.uri).then(done);
-		})
+		});
 
 		describe('#put', function() {
 			it('should store given document at the given location', function(done) {
