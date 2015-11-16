@@ -23,6 +23,10 @@ describe('DB', function() {
 			body: "<message language='en'><body>Hello World</body><sender>Alice</sender><recipient>Bob</recipient></message>"
 		};
 
+		afterEach(function(done) {
+			db.delete(doc.uri).then(done);
+		})
+
 		describe('#put', function() {
 			it('should store given document at the given location', function(done) {
 				db.put(doc.uri, doc.body)
@@ -34,6 +38,47 @@ describe('DB', function() {
 					})
 					.then(done);
 			});
+
+			describe('when username and password are not present', function(done) {
+				it('should not store the document', function(done) {
+					dbNoAuth.put(doc.uri, doc.body)
+						.catch(function() {
+							db.exists(doc.uri)
+								.then(function(docExists) {
+									expect(docExists).toBe(false);
+								})
+								.then(done);
+						});
+				});
+				it('should raise a 401 exception', function(done) {
+					dbNoAuth.put(doc.uri, doc.body)
+						.catch(function(err) {
+							expect(err.response.statusCode).toBe(401);
+							done();
+						});
+				});
+			});
+
+			describe('when username and password are incorrect', function(done) {
+				it('should not store the document', function(done) {
+					dbIncorrectAuth.put(doc.uri, doc.body)
+						.catch(function() {
+							db.exists(doc.uri)
+								.then(function(docExists) {
+									expect(docExists).toBe(false);
+								})
+								.then(done);
+						});
+				});
+				it('should raise a 401 exception', function(done) {
+					dbIncorrectAuth.put(doc.uri, doc.body)
+						.catch(function(err) {
+							expect(err.response.statusCode).toBe(401);
+							done();
+						});
+				});
+			});
+
 		});
 
 		describe('#delete', function() {
