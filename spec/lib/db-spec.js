@@ -179,6 +179,7 @@ describe('DB', function() {
 		});
 
 		describe('#get', function() {
+
 			it('returns the body of the document at the given uri', function(done) {
 				db.put(doc.uri, doc.body)
 					.then(function() {
@@ -190,6 +191,18 @@ describe('DB', function() {
 					})
 					.then(done);
 			});
+
+			describe('when uri does not contain a preceding slash', function(){
+				var uriWithoutPrecedingSlash = 'my-document';
+				it('should raise an error', function(done) {
+					db.get(uriWithoutPrecedingSlash)
+						.catch(function(err) {
+							expect(err.message).toBe('ArgumentError: \"uri\" must contain preceding \'/\'');
+							done();
+						});
+				});
+			});
+
 		});
 
 	});
