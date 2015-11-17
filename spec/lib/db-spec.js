@@ -125,6 +125,17 @@ describe('DB', function() {
 				});
 			});
 
+			describe('when uri does not contain a preceding slash', function(){
+				it('should raise an error', function(done) {
+					var uriWithoutPrecedingSlash = 'my-document';
+					db.delete(uriWithoutPrecedingSlash)
+						.catch(function(err) {
+							expect(err.message).toBe('ArgumentError: \"uri\" must contain preceding \'/\'');
+							done();
+						});
+				});
+			});
+
 			describe('when username and password are not present', function(done) {
 				it('should not delete the document', function(done) {
 					db.put(doc.uri, doc.body)
