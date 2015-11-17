@@ -1,12 +1,12 @@
 {
   "name": "easy-exist-node",
-  "version": "1.0.0",
-  "description": "",
+  "version": "0.2.0",
+  "description": "Node module to interact with eXist-db via its REST API. Promisfied.",
   "main": "index.js",
   "scripts": {
     "test": "grunt test"
   },
-  "author": "",
+  "author": "Tom Cass",
   "license": "ISC",
   "devDependencies": {
     "grunt": "^0.4.5",
