@@ -20,7 +20,7 @@ describe('DB', function() {
 
     var doc = {
       uri: "/test-collection/test.xml",
-      body: "<message language='en'><body>Hello World</body><sender>Alice</sender><recipient>Bob</recipient></message>"
+      body: '<message language="en"><body>Hello World</body><sender>Alice</sender><recipient>Bob</recipient></message>'
     };
 
     afterEach(function(done) {
@@ -242,5 +242,5 @@ describe('DB', function() {
 });
 
 function parseXmlResponse(xml) {
-  return xml.replace(/(\r\n|\n|\r|[ ]{4})/gm,'').replace(/\"/g,'\'');
+  return xml.replace(/(\r\n|\n|\r|[ ]{4})/gm,'');
 }
