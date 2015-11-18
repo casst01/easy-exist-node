@@ -233,9 +233,9 @@ describe('DB', function() {
             expect(parsedResult).toContain('<body>Hello World</body');
           })
           .then(done);
-      })
+      });
 
-    })
+    });
 
   });
 
