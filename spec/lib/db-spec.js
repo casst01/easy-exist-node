@@ -220,6 +220,23 @@ describe('DB', function() {
 
     });
 
+    describe('#query', function() {
+
+      beforeEach(function(done) {
+        db.put('/test-collection' + doc.uri, doc.body).then(done);
+      });
+
+      it('returns the results of the query', function(done) {
+        db.query('collection("test-collection")//message/body')
+          .then(function(result) {
+            var parsedResult = parseXmlResponse(result);
+            expect(parsedResult).toContain('<body>Hello World</body');
+          })
+          .then(done);
+      })
+
+    })
+
   });
 
 });
