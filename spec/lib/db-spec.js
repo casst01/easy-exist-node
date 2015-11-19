@@ -230,10 +230,21 @@ describe('DB', function() {
         db.query('collection("test-collection")//message/body')
           .then(function(result) {
             var parsedResult = parseXmlResponse(result);
-            expect(parsedResult).toContain('<body>Hello World</body');
+            expect(parsedResult).toContain('<body>Hello World</body>');
           })
           .then(done);
       });
+
+      describe('when user specifies no wrap', function() {
+        it('should return results without the wrapping exist:result element', function(done) {
+          db.query('collection("test-collection")//message/body', { wrap: 'no'})
+            .then(function(result) {
+            var parsedResult = parseXmlResponse(result);
+            expect(parsedResult).toEqual('<body>Hello World</body>');
+            })
+            .then(done);
+        });
+      })
 
     });
 

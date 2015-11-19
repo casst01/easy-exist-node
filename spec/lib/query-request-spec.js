@@ -25,6 +25,14 @@ describe('Query Request', function() {
           expect(xmlDoc.get('/xmlns:query/@max', namespaces).value()).toBe('10');
         });
       });
+
+      describe('when user specifies wrap', function(){
+        it('should add wrap attribute', function() {
+          var requestBody = new QueryRequest(query, { wrap: 'no' }).build();
+          var xmlDoc = libxml.parseXmlString(requestBody);
+          expect(xmlDoc.get('/xmlns:query/@wrap', namespaces).value()).toBe('no');
+        });
+      });
     });
   });
 
