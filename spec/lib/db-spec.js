@@ -239,8 +239,8 @@ describe('DB', function() {
         it('should return results without the wrapping exist:result element', function(done) {
           db.query('collection("test-collection")//message/body', { wrap: 'no' })
             .then(function(result) {
-            var parsedResult = parseXmlResponse(result);
-            expect(parsedResult).toEqual('<body>Hello World</body>');
+              var parsedResult = parseXmlResponse(result);
+              expect(parsedResult).toEqual('<body>Hello World</body>');
             })
             .then(done);
         });
