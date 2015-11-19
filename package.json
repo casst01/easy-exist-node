@@ -1,6 +1,6 @@
 {
   "name": "easy-exist-node",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Node module to interact with eXist-db via its REST API. Promisfied.",
   "main": "index.js",
   "scripts": {
