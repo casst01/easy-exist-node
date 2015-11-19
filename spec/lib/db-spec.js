@@ -20,7 +20,7 @@ describe('DB', function() {
 
     var doc = {
       uri: "/test-collection/test.xml",
-      body: "<message language='en'><body>Hello World</body><sender>Alice</sender><recipient>Bob</recipient></message>"
+      body: '<message language="en"><body>Hello World</body><sender>Alice</sender><recipient>Bob</recipient></message>'
     };
 
     afterEach(function(done) {
@@ -220,10 +220,38 @@ describe('DB', function() {
 
     });
 
+    describe('#query', function() {
+
+      beforeEach(function(done) {
+        db.put('/test-collection' + doc.uri, doc.body).then(done);
+      });
+
+      it('returns the results of the query', function(done) {
+        db.query('collection("test-collection")//message/body')
+          .then(function(result) {
+            var parsedResult = parseXmlResponse(result);
+            expect(parsedResult).toContain('<body>Hello World</body>');
+          })
+          .then(done);
+      });
+
+      describe('when user specifies no wrap', function() {
+        it('should return results without the wrapping exist:result element', function(done) {
+          db.query('collection("test-collection")//message/body', { wrap: 'no' })
+            .then(function(result) {
+              var parsedResult = parseXmlResponse(result);
+              expect(parsedResult).toEqual('<body>Hello World</body>');
+            })
+            .then(done);
+        });
+      });
+
+    });
+
   });
 
 });
 
 function parseXmlResponse(xml) {
-  return xml.replace(/(\r\n|\n|\r|[ ]{4})/gm,'').replace(/\"/g,'\'');
+  return xml.replace(/(\r\n|\n|\r|[ ]{4})/gm,'');
 }
