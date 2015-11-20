@@ -63,12 +63,13 @@ var exist = require('easy-exist');
 ## Contributing
 1. Fork the project.
 2. Create your branch
-3. Commit your changes with tests
+3. Make your changes with tests
+	1. Run tests: `grunt test`
+	2. Run hint: `grunt hint`
 4. Create a Pull Request
 
-### Running Tests
+### Test setup
 
-Jasmine is used for tests.
 The tests run against a local exist-db instance under a "test-user" account. If you want to run the tests yourself, ensure that this test-user account has been created. You can update the connection properties in `spec/db-spec.js`
 
 ```
