@@ -70,7 +70,7 @@ var exist = require('easy-exist');
 
 ### Test setup
 
-The tests run against a local exist-db instance under a "test-user" account. If you want to run the tests yourself, ensure that this test-user account has been created. You can update the connection properties in `spec/db-spec.js`
+The tests run against a local exist-db instance under a "test-user" account. If you want to run the tests yourself, ensure that this test-user account has been created. You can update the connection properties in `spec/lib/db-spec.js`
 
 ```
 var DB_HOST = 'http://localhost';
