@@ -10,35 +10,40 @@ Node module providing promisified API to interact with eXist-db's REST API.
 var exist = require('easy-exist');
 
 // connect
-var db = new exist.DB('http://localhost:8080', {
-	username: "user",
-	password: "easy"
+var db = new exist.DB('http://localhost', {
+    username: "test-user",
+    password: "password"
 });
 
-// add a document
-body =  '<message><body>Hello World</body></message>'
+body = '<message><body>Hello World</body></message>'
+
+// PUT a document
 db.put('/my-collection/my-document', body)
-	.then(function() {
-		console.log('Document Uploaded');
-	});
 
-// get document body
-db.get('/my-collection/my-document')
-	.then(function(doc) {
-		console.log('Document Body:', doc);
-	});
+    // Get the body of a document
+    .then(function() {
+        return db.get('/my-collection/my-document');
+    })
+    .then(function(doc) {
+        console.log('Document Body:', doc);
+    })
 
-// execute xQuery for all message bodies
-db.query('collection("my-collection")/message/body')
-	.then(function(result) {
-		console.log('xQuery result:', result);
-	});
+    // Execute xQuery
+    .then(function() {
+        return db.query('collection("my-collection")/message/body');
+    })
+    .then(function(result) {
+        console.log('xQuery result:', result);
+    })
 
-// delete the document
-db.delete('/my-collection/my-document')
-	.then(function() {
-		console.log('Document Deleted');
-	});
+    // Delete document
+    .then(function() {
+        return db.delete('/my-collection/my-document');
+    })
+    .then(function() {
+        console.log('Document Deleted');
+    });
+
 ```
 
 ## Installation
