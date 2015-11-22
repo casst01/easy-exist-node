@@ -60,6 +60,86 @@ Then require
 var exist = require('easy-exist');
 ```
 
+## API
+
+#### `new exist.DB(url, options)`
+
+##### Parameters
+
+* `url` - _string_
+* `options` - _object_ - configuration options
+
+##### Options
+
+The `options` object supports the following properties:
+
+* `username` - _string_ - Username for HTTP Basic Auth
+* `password` - _string_ - Password for HTTP Basic Auth
+* `collection` - _string_ - Name of collection under which all subsequent requests will apply to
+
+---
+
+#### `.put(uri, body)`
+
+Stores an XML document at the given URI.
+
+##### Parameters
+
+* `uri` - _string_ - the URI at which to store the given body
+* `body` - _string_ - the document body
+
+---
+
+#### `.get(uri)`
+
+Retrieves the body of the document at the given URI.
+
+##### Parameters
+
+* `uri` - _string_ - the URI of the document to fetch
+
+---
+
+#### `.delete(uri)`
+
+Deletes the document at the given URI.
+
+##### Parameters
+
+* `uri` - _string_ - the URI of the document to delete
+
+---
+
+#### `.query(query, options)`
+
+Executes given query against store and returns result
+
+##### Parameters
+
+* `query` - _string_ - xQuery to execute agains the store
+* `options` - _object_ - Query options
+
+##### Options
+
+The `options` object supports the following properties:
+
+* `start` - _integer_ - Specifies the index position of the first item in the result sequence to be returned. The default value is 1
+* `max` - _integer_ - The maximum number of items to be returned
+* `wrap` - _string_ - (`yes`|`no`) - Specifies whether the returned query results are to be wrapped into a surrounding <exist:result> element. The default value is yes
+
+---
+
+#### `.exists(uri)`
+
+Determines if a document exists at the given URI
+
+##### Parameters
+
+* `uri` - _string_ - the URI of the document to check
+
+---
+
+
 ## Contributing
 1. Fork the project.
 2. Create your branch
