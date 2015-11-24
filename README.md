@@ -88,6 +88,10 @@ Stores an XML document at the given URI.
 * `uri` - _string_ - the URI at which to store the given body
 * `body` - _string_ - the document body
 
+##### Returns
+
+A [request-promise] Promise. If a non-2xx response is returned, the promise is rejected.
+
 ---
 
 #### `.get(uri)`
@@ -98,6 +102,10 @@ Retrieves the body of the document at the given URI.
 
 * `uri` - _string_ - the URI of the document to fetch
 
+##### Returns
+
+A [request-promise] Promise. If a non-2xx response is returned, the promise is rejected, otherwise it is resolved with the body of the specified document.
+
 ---
 
 #### `.delete(uri)`
@@ -107,6 +115,10 @@ Deletes the document at the given URI.
 ##### Parameters
 
 * `uri` - _string_ - the URI of the document to delete
+
+##### Returns
+
+A [request-promise] Promise. If a non-2xx response is returned, the promise is rejected.
 
 ---
 
@@ -127,6 +139,10 @@ The `options` object supports the following properties:
 * `max` - _integer_ - The maximum number of items to be returned
 * `wrap` - _string_ - (`yes`|`no`) - Specifies whether the returned query results are to be wrapped into a surrounding <exist:result> element. The default value is yes
 
+##### Returns
+
+A [request-promise] Promise. If a non-2xx response is returned, the promise is rejected, otherwise it is resolved with the xQuery result.
+
 ---
 
 #### `.exists(uri)`
@@ -136,6 +152,10 @@ Determines if a document exists at the given URI
 ##### Parameters
 
 * `uri` - _string_ - the URI of the document to check
+
+##### Returns
+
+A Promise. Resolves with `true` if a document exists at the given uri, `false` if it does not. If a non 2xx and non 404 status code is returned, the promise is rejected.
 
 ---
 
@@ -157,3 +177,5 @@ var DB_HOST = 'http://localhost';
 // ...
 var db = new DB(DB_HOST, { username: 'test-user', password: 'password'} );
 ```
+
+[request-promise]:  https://www.npmjs.com/package/request-promise
