@@ -233,7 +233,7 @@ describe('DB', function() {
               expect(err.response.statusCode).toBe(401);
               done();
             });
-        })
+        });
       });
 
       describe('when uri does not contain a preceding slash', function(){
