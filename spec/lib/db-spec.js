@@ -207,6 +207,35 @@ describe('DB', function() {
 
     describe('#exists', function() {
       
+      it('should resolve with true if the document exists', function(done) {
+        db.put(doc.uri, doc.body)
+          .then(function() {
+            return db.exists(doc.uri);
+          })
+          .then(function(docExists) {
+            expect(docExists).toBe(true);
+          })
+          .then(done);
+      });
+
+      it('should resolve with false if the document does not exist (404)', function(done) {
+        db.exists('/non-existent-doc')
+          .then(function(docExists) {
+            expect(docExists).toBe(false);
+          })
+          .then(done);
+      });
+
+      describe('when a non 2xx and a non 404 status code is returned', function() {
+        it('should propogate the error so it can be caught', function(done) {
+          dbIncorrectAuth.exists(doc.uri)
+            .catch(function(err) {
+              expect(err.response.statusCode).toBe(401);
+              done();
+            });
+        })
+      });
+
       describe('when uri does not contain a preceding slash', function(){
         it('should raise an error', function(done) {
           var uriWithoutPrecedingSlash = 'my-document';
