@@ -172,7 +172,7 @@ _Syntactic Sugar. This function simply calls through to `.get(uri)`_
 
 ##### Returns
 
-A [request-promise] Promise. If a non-2xx response is returned, the promise is rejected, otherwise it is resolved with the result of the executing specified specified xQuery.
+A [request-promise] Promise. If a non-2xx response is returned, the promise is rejected, otherwise it is resolved with the result of executing the specified specified xQuery.
 
 ---
 
