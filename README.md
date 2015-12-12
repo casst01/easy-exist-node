@@ -162,7 +162,7 @@ A [request-promise] Promise. If a non-2xx response is returned, the promise is r
 
 #### `.executeStoredQuery(uri)`
 
-Executes the xQuery stored at the given URI and returnes the results.
+Executes the xQuery stored at the given URI and returns the results.
 
 _Syntactic Sugar. This function simply calls through to `.get(uri)`_
 
