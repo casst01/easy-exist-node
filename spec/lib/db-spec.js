@@ -284,6 +284,10 @@ describe('DB', function() {
         uri: '/my-collection/stored-queries/test.xqy'
       };
 
+      afterEach(function(done) {
+        db.delete(query.uri).then(done);
+      });
+
       describe('#storeQuery', function() {
 
         it('should store the given query', function(done) {
