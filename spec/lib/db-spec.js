@@ -298,9 +298,6 @@ describe('DB', function() {
             .then(function(queryExists) {
               expect(queryExists).toBe(true);
             })
-            .catch(function(err) {
-              console.log(err.response.statusMessage);
-            })
             .then(done);
         });
 
