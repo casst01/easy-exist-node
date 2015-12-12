@@ -1,3 +1,8 @@
+## 0.5.0
+Additions to public API:
+* `storeQuery(uri, query)`: Stores the given xQuery at the specified URI
+* `executeStoredQuery(uri)`: Executes the xQuery stored at the given URI and returns the results
+
 ## 0.4.0
 Public API:
 * **Updated** `exists(uri)`

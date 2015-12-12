@@ -1,6 +1,6 @@
 {
   "name": "easy-exist",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Node module providing promisified API to interact with eXist-db's REST API",
   "author": "Tom Cass",
   "keywords": [
