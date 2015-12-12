@@ -277,6 +277,40 @@ describe('DB', function() {
 
     });
 
+    describe('#storeQuery', function() {
+
+      var query = {
+        body: 'let $var := 1\nreturn <var>{$var}</var>',
+        uri: '/my-collection/stored-queries/test.xqy'
+      };
+
+      it('should store the given query', function(done) {
+        db.storeQuery(query.uri, query.body)
+          .then(function() {
+            return db.exists(query.uri);
+          })
+          .then(function(queryExists) {
+            expect(queryExists).toBe(true);
+          })
+          .catch(function(err) {
+            console.log(err.response.statusMessage);
+          })
+          .then(done);
+      });
+
+      describe('when uri does not contain a preceding slash', function(){
+        it('should raise an error', function(done) {
+          var uriWithoutPrecedingSlash = 'my-document';
+          db.storeQuery(uriWithoutPrecedingSlash, query.body)
+            .catch(function(err) {
+              expect(err.message).toBe('ArgumentError: \"uri\" must contain preceding \'/\'');
+              done();
+            });
+        });
+      });
+
+    });
+
   });
 
 });
