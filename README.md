@@ -145,6 +145,36 @@ A [request-promise] Promise. If a non-2xx response is returned, the promise is r
 
 ---
 
+#### `.storeQuery(uri, query)`
+
+Stores the given xQuery at the specified URI
+
+##### Parameters
+
+* `uri` - _string_ - the URI at which to store the given xQuery
+* `query` - _string_ - the xQuery body
+
+##### Returns
+
+A [request-promise] Promise. If a non-2xx response is returned, the promise is rejected.
+
+---
+
+#### `.executeStoredQuery(uri)`
+
+Executes the xQuery stored at the given URI and returnes the results
+_Syntactic Sugar. This function simply calls through to `.get(uri)`_
+
+##### Parameters
+
+* `uri` - _string_ - the URI of the xQuery to execute
+
+##### Returns
+
+A [request-promise] Promise. If a non-2xx response is returned, the promise is rejected, otherwise it is resolved with the result of the executing specified specified xQuery.
+
+---
+
 #### `.exists(uri)`
 
 Determines if a document exists at the given URI
